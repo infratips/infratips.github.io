@@ -1,2 +1,1 @@
-# infratips.github.io
-Site InfraTips
+# Site InfraTips
