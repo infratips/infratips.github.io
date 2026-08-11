@@ -12,10 +12,11 @@
       </thead>
       <tbody>
         {% for post in site.posts %}
+        {% assign category_config = site.data.categories[post.category] %}
         <tr>
           <td class="td_title" data-label="Titulo"><a href="{{ post.url | relative_url }}">{{ post.title }}</a></td>
           <td class="td_date" data-label="Data"><time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%d/%m/%Y" }}</time></td>
-          <td class="td_category" data-label="Categoria">{{ post.category }}</td>
+          <td class="td_category" data-label="Categoria">{{ category_config.label | default: post.category }}</td>
         </tr>
         {% endfor %}
       </tbody>

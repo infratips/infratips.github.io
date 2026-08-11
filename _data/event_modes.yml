@@ -1,0 +1,6 @@
+online:
+  label: "Online"
+in-person:
+  label: "Presencial"
+hybrid:
+  label: "Híbrido"

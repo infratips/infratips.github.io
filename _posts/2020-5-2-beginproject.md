@@ -1,14 +1,12 @@
 ---
-layout: post
 title: Iniciando projeto InfraTips
-toc: true
-footer: true
-maximize: true
-toc_level: 4
-category: Eventos
-date: 2020-5-2
-excerpt: "Este é um trecho."
-abstract: "Finalmente saindo da gaveta, estamos iniciando o projeto InfraTips!"
+summary: "O inicio do InfraTips como projeto de compartilhamento de conhecimento e experiencias em tecnologia."
+type: article
+category: fundamentals-career
+tags:
+  - community
+  - infratips
+status: published
 ---
 
 ## Projeto InfraTips

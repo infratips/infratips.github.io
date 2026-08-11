@@ -58,6 +58,25 @@ test("artigo possui semantica e imagem descritiva", async ({ page }) => {
   await expect(page.locator("time")).toContainText("02/05/2020");
 });
 
+test("InfraTip deriva template, taxonomia e controles do tipo", async ({ page }, testInfo) => {
+  await page.goto("/verificar-portas-em-escuta-no-linux/");
+
+  await expect(page.locator("article[itemtype='https://schema.org/TechArticle']")).toBeVisible();
+  await expect(page.getByRole("heading", { level: 1 })).toContainText(
+    "Como verificar portas em escuta no Linux"
+  );
+  await expect(page.locator(".post_info")).toContainText("InfraTip");
+  await expect(page.locator(".post_info")).toContainText("Linux e Open Source");
+  await expect(page.locator(".post_info")).toContainText("Iniciante");
+  await expect(page.locator("#toc_toggle")).toHaveCount(0);
+  await expect(page.locator("pre code").first()).toContainText("ss -lntup");
+
+  await page.screenshot({
+    path: testInfo.outputPath(`infratip-${testInfo.project.name}.png`),
+    fullPage: true
+  });
+});
+
 test("controles de leitura funcionam por teclado", async ({ page }) => {
   await page.goto("/beginproject/");
 
@@ -83,7 +102,7 @@ test("controles de leitura funcionam por teclado", async ({ page }) => {
 });
 
 test("paginas principais nao possuem violacoes criticas de acessibilidade", async ({ page }) => {
-  for (const path of ["/", "/beginproject/"]) {
+  for (const path of ["/", "/beginproject/", "/verificar-portas-em-escuta-no-linux/"]) {
     await page.goto(path);
     const results = await new AxeBuilder({ page }).analyze();
     expect(results.violations.filter(({ impact }) => impact === "critical"), path).toEqual([]);

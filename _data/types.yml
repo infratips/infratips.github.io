@@ -1,0 +1,36 @@
+article:
+  label: "Artigo"
+  description: "Análise técnica aprofundada ou conteúdo autoral durável."
+  level: optional
+  toc: true
+  schema: BlogPosting
+tutorial:
+  label: "Tutorial"
+  description: "Procedimento técnico reproduzível, organizado em etapas."
+  level: required
+  toc: true
+  schema: TechArticle
+tip:
+  label: "InfraTip"
+  description: "Dica técnica curta, objetiva e aplicável."
+  level: required
+  toc: false
+  schema: TechArticle
+news:
+  label: "Notícia comentada"
+  description: "Curadoria de uma fonte externa com contexto e análise InfraTips."
+  level: forbidden
+  toc: false
+  schema: NewsArticle
+experience:
+  label: "Experiência de campo"
+  description: "Relato prático com contexto, diagnóstico, solução e lições."
+  level: optional
+  toc: true
+  schema: BlogPosting
+event:
+  label: "Evento"
+  description: "Divulgação ou registro estruturado de um evento técnico."
+  level: forbidden
+  toc: false
+  schema: Event
