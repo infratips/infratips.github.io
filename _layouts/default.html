@@ -1,19 +1,22 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="{{ page.lang | default: site.lang }}">
   {% include head.html %}
   <body class="page">
+    <a class="skip_link" href="#main_content">Pular para o conteudo</a>
     {% include background.html %}
-    <div class="container" id="ctner">
+    <div class="terminal_shell" id="terminal_shell">
       {% include header.html %}
-      <div class="div_article" id="div_atcl">       
-        <article id="main_atcl" itemscope itemtype="http://schema.org/BlogPosting">
-          {{content}}
+      <main class="main_content" id="main_content" tabindex="-1">
+        <div class="content_frame">
+          {{ content }}
           {% include list_of_articles.html %}
-        </article>
           {% if page.footer == true %}
-          {% include footer.html %}
+            {% include footer.html %}
           {% endif %}
-      </div>
+        </div>
+      </main>
     </div>
+    <script src="{{ '/assets/js/matrix.js' | relative_url }}" defer></script>
+    <script src="{{ '/assets/js/interface.js' | relative_url }}" defer></script>
   </body>
 </html>

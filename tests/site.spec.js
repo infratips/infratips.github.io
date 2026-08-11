@@ -1,0 +1,107 @@
+const { test, expect } = require("@playwright/test");
+const AxeBuilder = require("@axe-core/playwright").default;
+
+test("home renderiza com estrutura, SEO e sem overflow", async ({ page }, testInfo) => {
+  await page.goto("/");
+
+  await expect(page.locator("html")).toHaveAttribute("lang", "pt-BR");
+  await expect(page.locator("h1")).toHaveCount(1);
+  await expect(page.locator("main")).toBeVisible();
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+    "href",
+    "https://www.infratips.com.br/"
+  );
+  await expect(page.locator('meta[property="og:title"]')).toHaveCount(1);
+
+  const hasOverflow = await page.evaluate(
+    () => document.documentElement.scrollWidth > document.documentElement.clientWidth
+  );
+  expect(hasOverflow).toBe(false);
+
+  await page.screenshot({
+    path: testInfo.outputPath(`home-${testInfo.project.name}.png`),
+    fullPage: true
+  });
+});
+
+test("header oferece controles e links sociais acessiveis", async ({ page }) => {
+  await page.goto("/");
+
+  await expect(page.getByRole("link", { name: "Eleu Carlos no LinkedIn" })).toHaveAttribute(
+    "href",
+    "https://www.linkedin.com/in/eleucarlos/"
+  );
+
+  const undersized = await page.locator(".site_header a:visible, .site_header button:visible").evaluateAll(
+    (elements) => elements
+      .map((element) => {
+        const rect = element.getBoundingClientRect();
+        return { label: element.getAttribute("aria-label") || element.textContent, width: rect.width, height: rect.height };
+      })
+      .filter(({ width, height }) => width < 43 || height < 43)
+  );
+  expect(undersized).toEqual([]);
+
+  await page.keyboard.press("Tab");
+  await expect(page.getByRole("link", { name: "Pular para o conteudo" })).toBeFocused();
+  await page.getByRole("button", { name: /Matrix/ }).focus();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("html")).toHaveAttribute("data-matrix-state", /paused|running/);
+});
+
+test("artigo possui semantica e imagem descritiva", async ({ page }) => {
+  await page.goto("/beginproject/");
+
+  await expect(page.locator("article[itemtype='https://schema.org/BlogPosting']")).toBeVisible();
+  await expect(page.locator("h1")).toHaveCount(1);
+  await expect(page.locator("article img")).toHaveAttribute("alt", /InfraTips/);
+  await expect(page.locator("time")).toContainText("02/05/2020");
+});
+
+test("controles de leitura funcionam por teclado", async ({ page }) => {
+  await page.goto("/beginproject/");
+
+  const maximize = page.locator("#maximize_btn");
+  if (await maximize.isVisible()) {
+    await maximize.focus();
+    await page.keyboard.press("Enter");
+    await expect(maximize).toHaveAttribute("aria-pressed", "true");
+    await expect(page.locator(".terminal_shell")).toHaveClass(/is_maximized/);
+  }
+
+  const toc = page.locator("#toc_toggle");
+  await toc.focus();
+  await page.keyboard.press("Enter");
+  await expect(page.locator("#popup_toc")).toBeVisible();
+  await page.keyboard.press("Escape");
+  await expect(page.locator("#popup_toc")).toBeHidden();
+
+  const next = page.locator("#next_btn");
+  await next.focus();
+  await page.keyboard.press("Enter");
+  await expect.poll(() => page.evaluate(() => window.scrollY)).toBeGreaterThan(0);
+});
+
+test("paginas principais nao possuem violacoes criticas de acessibilidade", async ({ page }) => {
+  for (const path of ["/", "/beginproject/"]) {
+    await page.goto(path);
+    const results = await new AxeBuilder({ page }).analyze();
+    expect(results.violations.filter(({ impact }) => impact === "critical"), path).toEqual([]);
+  }
+});
+
+test.describe("movimento reduzido", () => {
+  test("Matrix inicia pausada e pode ser reativada", async ({ page }) => {
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await page.goto("/");
+    await expect(page.locator("html")).toHaveAttribute("data-matrix-state", "paused");
+
+    const canvas = page.locator("#matrix_canvas");
+    const before = await canvas.screenshot();
+    await page.waitForTimeout(200);
+    expect(await canvas.screenshot()).toEqual(before);
+
+    await page.getByRole("button", { name: /Matrix/ }).click();
+    await expect(page.locator("html")).toHaveAttribute("data-matrix-state", "running");
+  });
+});

@@ -1,22 +1,81 @@
-## Settings
 title: InfraTips
 owner: "Eleu Carlos"
+author:
+  name: "Eleu Carlos"
+  twitter: "TipsInfra"
+description: "Conteudo tecnico, experiencias praticas e orientacao para aprender e trabalhar com infraestrutura, Linux, Cloud, DevOps, seguranca e IA."
+lang: pt-BR
 url: "https://www.infratips.com.br"
 baseurl: ""
 permalink: /:title/
-description: ""
+timezone: America/Sao_Paulo
 markdown: kramdown
-webrick:
-  headers:
-    Access-Control-Allow-Origin: "*"
-## Global Variables
-email: "infratips@gmail.com"
-github: "infratips/"
-# path to: css/, fonts/, img/ and js/
-assets_path: "/assets" # i.e. "/assets" 
-statement: "Designed by InfraTips, All Rights Reserved"
-# default max toc levels: 1 - 6 (h1 - h6)
-toc_level: 3
-# texts randomly displayed in background
-bgtext: "αβγδεζηθικλμνξοπρστυφχψω∷∫∮∝∞∧∨∑∏∪∩∈∵∴⊥‖∠⌒⊙≌√"
 theme: jekyll-theme-cayman
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+email: "infratips@gmail.com"
+github: "infratips"
+assets_path: "/assets"
+statement: "InfraTips. Conhecimento tecnico compartilhado."
+toc_level: 3
+bgtext: "alpha beta gamma delta lambda sigma omega 01 Linux Cloud DevOps IaC"
+logo: "/assets/img/infratipsalpha.png"
+
+twitter:
+  username: TipsInfra
+  card: summary
+
+social:
+  name: InfraTips
+  links:
+    - "https://github.com/infratips/"
+    - "https://www.youtube.com/channel/UCFkdMTcBKxdKownORUBEkIw"
+    - "https://twitter.com/TipsInfra"
+    - "https://www.linkedin.com/in/eleucarlos/"
+
+social_links:
+  - label: "E-mail"
+    aria_label: "Enviar e-mail para o InfraTips"
+    url: "mailto:infratips@gmail.com"
+    icon: "fa-envelope-square"
+  - label: "GitHub"
+    aria_label: "InfraTips no GitHub"
+    url: "https://github.com/infratips/"
+    icon: "fa-github"
+    external: true
+  - label: "YouTube"
+    aria_label: "InfraTips no YouTube"
+    url: "https://www.youtube.com/channel/UCFkdMTcBKxdKownORUBEkIw"
+    icon: "fa-youtube"
+    external: true
+  - label: "X/Twitter"
+    aria_label: "InfraTips no X, antigo Twitter"
+    url: "https://twitter.com/TipsInfra"
+    icon: "fa-twitter"
+    external: true
+  - label: "LinkedIn"
+    aria_label: "Eleu Carlos no LinkedIn"
+    url: "https://www.linkedin.com/in/eleucarlos/"
+    icon: "fa-linkedin"
+    external: true
+
+defaults:
+  - scope:
+      path: ""
+    values:
+      image: "/assets/img/infratipsalpha.png"
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - README.md
+  - node_modules
+  - package.json
+  - package-lock.json
+  - playwright.config.js
+  - scripts
+  - tests
+  - vendor

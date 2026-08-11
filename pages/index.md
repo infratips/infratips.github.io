@@ -2,12 +2,8 @@
 layout: default
 post_list: "date"
 toc: false
-home_btn: true
-btn_text: true
 footer: true
 title: "InfraTips"
-author: "Eleu Carlos"
-encrypted_text: true
 permalink: /
 ---
 
@@ -47,7 +43,7 @@ permalink: /
 ## Fundador
 * Eleu Carlos Roldão da S. Junior é Gaúcho nascido na região metropolitana de Porto Alegre. Trabalha com GNU/Linux desde 2001, possui diversas certificações e atualmente vem trabalhando em projetos de IaC.
   
-  <p class="encrypted">IMPORTANTE: Tudo que for postado em quaisquer redes sociais da InfraTips não refere-se as empresas que os integrantes do time trabalham atualmente, portanto comentários deverão ser postados diretamente a InfraTips.<p>
+  <p class="encrypted">IMPORTANTE: Tudo que for postado em quaisquer redes sociais da InfraTips não refere-se as empresas que os integrantes do time trabalham atualmente, portanto comentários deverão ser postados diretamente a InfraTips.</p>
 
   
 <!--```ruby

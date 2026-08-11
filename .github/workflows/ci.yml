@@ -1,0 +1,66 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@95ef2b042f9d7a56d8268cba8559e2842e2ad01b # v1
+        with:
+          bundler-cache: true
+
+      - name: Setup Node.js
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Install browser test dependencies
+        run: |
+          npm ci
+          npx playwright install --with-deps chromium
+
+      - name: Validate content
+        run: |
+          bundle exec ruby scripts/validate_content.rb --self-test
+          bundle exec ruby scripts/validate_content.rb
+
+      - name: Scan tracked files for high-confidence secrets
+        run: scripts/scan_secrets.sh
+
+      - name: Build Jekyll site
+        env:
+          JEKYLL_ENV: production
+        run: bundle exec jekyll build --strict_front_matter --trace
+
+      - name: Validate generated HTML and internal links
+        run: bundle exec htmlproofer ./_site --disable-external
+
+      - name: Run rendered smoke and accessibility tests
+        run: npm test
+
+      - name: Upload site and test evidence
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: infratips-p0-${{ github.run_id }}
+          path: |
+            _site
+            test-results
+            playwright-report
+          if-no-files-found: warn
+          retention-days: 14
