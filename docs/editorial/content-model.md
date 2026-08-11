@@ -55,7 +55,7 @@ Os valores validos estao em `_data/levels.yml`.
 
 ### Evento
 
-`event` exige `starts_at`, `timezone` e `mode`. Datas usam ISO 8601 com offset, por exemplo `2026-09-10T19:00:00-03:00`. `mode` aceita `online`, `in-person` ou `hybrid`.
+`event` exige `starts_at`, `timezone` e `mode`. Use data ISO 8601 (`2026-09-10`) quando a fonte divulgar somente o dia, ou data/hora ISO 8601 com timezone (`2026-09-10T19:00:00-03:00`) quando houver horario confirmado. `mode` aceita `online`, `in-person` ou `hybrid`.
 
 Campos opcionais: `ends_at`, `location`, `registration_url`, `recording_url`, `slides_url` e `repository_url`.
 

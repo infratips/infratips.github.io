@@ -278,10 +278,10 @@ class ContentValidator
       %w[starts_at timezone mode].each do |field|
         errors << "#{relative}: campo '#{field}' e obrigatorio para event" unless present?(data[field])
       end
-      starts_at = parse_datetime(data["starts_at"])
-      ends_at = parse_datetime(data["ends_at"])
-      errors << "#{relative}: starts_at deve ser ISO 8601 com timezone" if present?(data["starts_at"]) && !starts_at
-      errors << "#{relative}: ends_at deve ser ISO 8601 com timezone" if present?(data["ends_at"]) && !ends_at
+      starts_at = parse_event_date(data["starts_at"])
+      ends_at = parse_event_date(data["ends_at"])
+      errors << "#{relative}: starts_at deve ser data ISO 8601 ou data/hora ISO 8601 com timezone" if present?(data["starts_at"]) && !starts_at
+      errors << "#{relative}: ends_at deve ser data ISO 8601 ou data/hora ISO 8601 com timezone" if present?(data["ends_at"]) && !ends_at
       errors << "#{relative}: ends_at nao pode ser anterior a starts_at" if starts_at && ends_at && ends_at < starts_at
       errors << "#{relative}: mode invalido '#{data["mode"]}'" if present?(data["mode"]) && !@event_modes.key?(data["mode"])
       errors << "#{relative}: timezone deve usar um identificador IANA" if present?(data["timezone"]) && !data["timezone"].to_s.match?(%r{\A[A-Za-z_]+/[A-Za-z_]+(?:/[A-Za-z_]+)?\z})
@@ -408,6 +408,17 @@ class ContentValidator
     return nil unless text.include?("T") && text.match?(/(?:Z|[+-]\d{2}:\d{2})\z/)
     DateTime.iso8601(text)
   rescue Date::Error
+    nil
+  end
+
+  def parse_event_date(value)
+    return if value.nil?
+
+    text = value.to_s
+    return DateTime.iso8601("#{text}T00:00:00Z") if text.match?(/\A\d{4}-\d{2}-\d{2}\z/)
+
+    parse_datetime(value)
+  rescue Date::Error, ArgumentError
     nil
   end
 

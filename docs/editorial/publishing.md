@@ -12,6 +12,8 @@
 
 Listas recentes, páginas de tipo/categoria, tags, relacionados, sitemap e RSS são atualizados pelo build. Publicar conteúdo não exige editar esses índices.
 
+Para eventos curados, use a URL oficial da organizacao em `registration_url` e confirme data, local e modalidade antes do Pull Request. Nao invente horario: quando a fonte informar somente o dia, use a data ISO 8601 sem horario.
+
 ```bash
 bundle exec ruby scripts/validate_content.rb --self-test
 bundle exec ruby scripts/validate_content.rb
