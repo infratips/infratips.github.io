@@ -340,6 +340,28 @@ code {
   color: $muted;
 }
 
+.content_source,
+.content_details {
+  margin: 18px 0 0;
+  padding: 12px 16px;
+  border: 1px solid rgba($green, 0.35);
+  background: rgba($black, 0.45);
+}
+
+.content_details div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.content_details dt {
+  color: $muted;
+}
+
+.content_details dd {
+  margin: 0;
+}
+
 .encrypted {
   color: $warning;
 }

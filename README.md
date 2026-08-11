@@ -47,21 +47,23 @@ O Playwright gera um build de producao, inicia um servidor temporario em `http:/
 
 ```text
 _config.yml       Configuracao global, dominio e redes sociais
+_data/            Tipos, categorias, levels, status e labels controlados
 _includes/        Componentes Liquid compartilhados
 _layouts/         Layouts base e de conteudo
 _posts/           Conteudo Markdown publicado
 pages/            Home e paginas institucionais
 assets/           SCSS, JavaScript, fontes e imagens
+docs/             Arquitetura, contrato editorial e continuidade
 scripts/          Validacoes locais e de CI
 tests/            Smoke tests Playwright
 ```
 
-O modelo editorial, tipos controlados e taxonomia serao documentados na fase P1. Ate la, novos posts devem seguir o front matter do conteudo existente e passar por Pull Request.
+O contrato editorial e os campos por tipo estao em [`docs/editorial/content-model.md`](docs/editorial/content-model.md). A taxonomia executavel fica em `_data/`, e o fluxo completo esta em [`docs/editorial/publishing.md`](docs/editorial/publishing.md).
 
 ## Publicacao
 
 1. Crie uma branch a partir de `master`.
-2. Adicione ou altere o conteudo em Markdown.
+2. Adicione `_posts/YYYY-MM-DD-slug.md` com front matter valido.
 3. Execute build e testes locais.
 4. Abra um Pull Request e aguarde os checks.
 5. Apos aprovacao humana, faca merge em `master`.

@@ -1,0 +1,20 @@
+docs_vivas:
+  version: 1
+  role: single_repo
+  project: infratips
+  standard: docs/README.md
+  anti_drift:
+    command: bundle exec ruby scripts/validate_content.rb
+    cwd: .
+  canonical:
+    architecture: docs/architecture/overview.md
+    editorial_model: docs/editorial/content-model.md
+    taxonomy: docs/editorial/taxonomy.md
+    publishing: docs/editorial/publishing.md
+  operational_state_owner: docs/roadmap.md
+  continuity:
+    owner: docs/roadmap.md
+    section: Handoff
+  repositories:
+    system: .
+  definition_of_done: docs/README.md

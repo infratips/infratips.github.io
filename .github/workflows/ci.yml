@@ -34,7 +34,7 @@ jobs:
           npm ci
           npx playwright install --with-deps chromium
 
-      - name: Validate content
+      - name: Validate editorial contract and documentation anti-drift
         run: |
           bundle exec ruby scripts/validate_content.rb --self-test
           bundle exec ruby scripts/validate_content.rb
@@ -57,7 +57,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
-          name: infratips-p0-${{ github.run_id }}
+          name: infratips-ci-${{ github.run_id }}
           path: |
             _site
             test-results

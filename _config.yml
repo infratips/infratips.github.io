@@ -66,6 +66,15 @@ defaults:
       path: ""
     values:
       image: "/assets/img/infratipsalpha.png"
+      footer: true
+      maximize: true
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      author: "Eleu Carlos"
+      toc_level: 3
 
 exclude:
   - Gemfile
@@ -78,4 +87,5 @@ exclude:
   - playwright.config.js
   - scripts
   - tests
+  - docs
   - vendor

@@ -1,0 +1,10 @@
+fundamentals-career:
+  label: "Fundamentos e Carreira"
+linux-open-source:
+  label: "Linux e Open Source"
+cloud-devops:
+  label: "Cloud e DevOps"
+security:
+  label: "Segurança"
+programming-ai:
+  label: "Programação e IA"
