@@ -1,10 +1,12 @@
 <header class="site_header">
   <nav class="header_nav" aria-label="Navegacao principal">
     <div class="header_group header_primary" aria-label="Navegacao">
-      <a class="header_btn" href="{{ '/' | relative_url }}" aria-label="Pagina inicial" title="Pagina inicial">
-        <i class="fa fa-home" aria-hidden="true"></i>
-        <span class="btn_text">Inicio</span>
+      {% for navigation_link in site.data.navigation %}
+      <a class="header_btn" href="{{ navigation_link.url | relative_url }}" aria-label="{{ navigation_link.aria_label }}" title="{{ navigation_link.aria_label }}"{% if page.url == navigation_link.url %} aria-current="page"{% endif %}>
+        <i class="fa {{ navigation_link.icon }}" aria-hidden="true"></i>
+        <span class="btn_text">{{ navigation_link.label }}</span>
       </a>
+      {% endfor %}
     </div>
 
     <div class="header_group header_social" aria-label="Redes e contato">

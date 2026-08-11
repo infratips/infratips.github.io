@@ -1,0 +1,30 @@
+{% assign related_count = 0 %}
+{% assign selected_urls = "|" | append: page.url | append: "|" %}
+{% capture related_items %}{% endcapture %}
+{% for candidate in site.posts %}
+  {% if related_count >= 3 %}{% break %}{% endif %}
+  {% unless candidate.url == page.url %}
+    {% assign is_related = false %}
+    {% if candidate.category == page.category or candidate.type == page.type %}
+      {% assign is_related = true %}
+    {% else %}
+      {% for tag in page.tags %}
+        {% if candidate.tags contains tag %}{% assign is_related = true %}{% break %}{% endif %}
+      {% endfor %}
+    {% endif %}
+    {% assign candidate_marker = "|" | append: candidate.url | append: "|" %}
+    {% if is_related %}
+    {% unless selected_urls contains candidate_marker %}
+      {% capture related_items %}{{ related_items }}{% include content_item.html post=candidate %}{% endcapture %}
+      {% assign selected_urls = selected_urls | append: candidate_marker %}
+      {% assign related_count = related_count | plus: 1 %}
+    {% endunless %}
+    {% endif %}
+  {% endunless %}
+{% endfor %}
+{% if related_count > 0 %}
+<aside class="related_content" aria-labelledby="related_content_title">
+  <h2 id="related_content_title">&gt; conteúdo_relacionado</h2>
+  <ol class="content_entries">{{ related_items }}</ol>
+</aside>
+{% endif %}

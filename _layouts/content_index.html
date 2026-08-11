@@ -1,0 +1,41 @@
+---
+layout: default
+---
+<article class="content_index">
+  <h1>{{ page.title }}</h1>
+  <p class="archive_summary">{{ page.summary }}</p>
+
+  <section aria-labelledby="content_types_title">
+    <h2 id="content_types_title">&gt; por_tipo</h2>
+    <ul class="directory_list">
+      {% for type_entry in site.data.types %}
+        {% assign type_id = type_entry[0] %}
+        {% assign type_config = type_entry[1] %}
+        {% assign type_posts = site.posts | where: "type", type_id %}
+        <li>
+          <a href="{{ '/conteudo/tipos/' | append: type_id | append: '/' | relative_url }}">{{ type_config.label }}</a>
+          <span>{{ type_config.description }}</span>
+          <small>{{ type_posts.size }} publicado{% if type_posts.size != 1 %}s{% endif %}</small>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <section aria-labelledby="content_categories_title">
+    <h2 id="content_categories_title">&gt; por_categoria</h2>
+    <ul class="directory_list">
+      {% for category_entry in site.data.categories %}
+        {% assign category_id = category_entry[0] %}
+        {% assign category_config = category_entry[1] %}
+        {% assign category_posts = site.posts | where: "category", category_id %}
+        <li>
+          <a href="{{ '/conteudo/categorias/' | append: category_id | append: '/' | relative_url }}">{{ category_config.label }}</a>
+          <span>{{ category_config.description }}</span>
+          <small>{{ category_posts.size }} publicado{% if category_posts.size != 1 %}s{% endif %}</small>
+        </li>
+      {% endfor %}
+    </ul>
+  </section>
+
+  <p class="directory_secondary"><a href="{{ '/conteudo/tags/' | relative_url }}">Explorar índice de tags</a></p>
+</article>

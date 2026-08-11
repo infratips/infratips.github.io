@@ -3,23 +3,23 @@
 ## Fases
 
 - P0 — Fundacao tecnica e UX: concluida e publicada.
-- P1 — Modelo editorial: implementada localmente e pronta para revisao na branch `feat/p1-editorial-model`.
-- P2 — Home e descoberta: nao iniciada.
+- P1 — Modelo editorial: concluída e publicada no merge `ef851712`.
+- P2 — Home e descoberta: implementada localmente e pronta para revisão na branch `feat/p2-content-discovery`.
 - P3 — Experiencia educacional: nao iniciada.
 - P4 — Preparacao para Cortex: nao iniciada.
 
 ## Handoff
 
-**LAST COMPLETED:** P0 publicada; correcao de visibilidade Matrix e texto da home integrados no merge `dc7fec62`.
+**LAST COMPLETED:** P1 publicada no merge `ef851712`, com CI e GitHub Pages verdes e produção validada.
 
-**CURRENT STATE:** P1 possui contrato Markdown, taxonomia executavel, template compartilhado, anti-drift editorial, exemplo de InfraTip e documentacao viva; gates locais e CI remoto do PR #3 estao verdes.
+**CURRENT STATE:** P2 possui home de descoberta, navegação por tipos/categorias/tags, eventos, relacionados, breadcrumbs e RSS; gates locais e inspeção Playwright nos quatro breakpoints estão verdes.
 
-**PARTIALLY COMPLETED:** revisao e aprovacao humanas do Pull Request #3.
+**PARTIALLY COMPLETED:** CI remoto e revisão humana da P2.
 
 **BLOCKED:** nenhum bloqueio conhecido.
 
 **PENDING HUMAN DECISIONS:** aprovar ou solicitar ajustes na P1 antes de qualquer merge.
 
-**NEXT CRITICAL ACTION:** revisar o Pull Request e seus artefatos; nao iniciar P2 antes da aprovacao da P1.
+**NEXT CRITICAL ACTION:** abrir o PR P2, validar CI e artefatos e aguardar revisão sem iniciar P3.
 
-**NEXT 5:** revisar contrato e InfraTip; inspecionar artefatos do CI; solicitar ajustes ou aprovar; mesclar somente com autorizacao; planejar P2 separadamente.
+**NEXT 5:** abrir PR P2; confirmar CI; inspecionar artefatos; solicitar ajustes ou aprovar; não iniciar P3 antes do merge autorizado.

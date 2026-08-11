@@ -1,0 +1,18 @@
+{% if page.archive_kind == "type" %}
+  {% assign archive_config = site.data.types[page.archive_id] %}
+  {% assign archive_posts = site.posts | where: "type", page.archive_id %}
+{% elsif page.archive_kind == "category" %}
+  {% assign archive_config = site.data.categories[page.archive_id] %}
+  {% assign archive_posts = site.posts | where: "category", page.archive_id %}
+{% endif %}
+<p class="archive_summary">{{ archive_config.description }}</p>
+{% if archive_posts.size > 0 %}
+<ol class="content_entries archive_entries">
+  {% for post in archive_posts %}
+    {% include content_item.html post=post %}
+  {% endfor %}
+</ol>
+{% else %}
+<p class="empty_state">Ainda não há conteúdo publicado nesta seção.</p>
+{% endif %}
+<p class="archive_back"><a href="{{ '/conteudo/' | relative_url }}">Voltar para todo o conteúdo</a></p>

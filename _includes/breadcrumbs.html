@@ -1,0 +1,23 @@
+{% unless page.url == "/" or page.url == "/404.html" %}
+<nav class="breadcrumbs" aria-label="Navegação estrutural" itemscope itemtype="https://schema.org/BreadcrumbList">
+  <ol>
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="{{ '/' | relative_url }}"><span itemprop="name">Início</span></a>
+      <meta itemprop="position" content="1">
+    </li>
+    {% if page.layout == "post" or page.layout == "archive" or page.layout == "tag_index" %}
+    <li itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <a itemprop="item" href="{{ '/conteudo/' | relative_url }}"><span itemprop="name">Conteúdo</span></a>
+      <meta itemprop="position" content="2">
+    </li>
+    {% assign current_position = 3 %}
+    {% else %}
+    {% assign current_position = 2 %}
+    {% endif %}
+    <li aria-current="page" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+      <span itemprop="name">{{ page.title }}</span>
+      <meta itemprop="position" content="{{ current_position }}">
+    </li>
+  </ol>
+</nav>
+{% endunless %}

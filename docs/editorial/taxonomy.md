@@ -21,3 +21,5 @@ Templates e validadores devem consultar esses arquivos em vez de espalhar labels
 - Certificacoes, provedores e ferramentas funcionam inicialmente como tags.
 
 Alterar `_data` muda o contrato executavel. A mesma mudanca deve revisar este documento e exemplos relacionados quando houver impacto de significado.
+
+Cada tipo e categoria possui uma página de arquivo correspondente. O anti-drift rejeita IDs sem arquivo, arquivos duplicados, permalinks divergentes e referências a IDs inexistentes.

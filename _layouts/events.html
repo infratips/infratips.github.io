@@ -1,0 +1,37 @@
+---
+layout: default
+---
+<article class="events_page">
+  <h1>{{ page.title }}</h1>
+  <p class="archive_summary">{{ page.summary }}</p>
+  {% assign events = site.posts | where: "type", "event" | sort: "starts_at" %}
+  {% assign now_timestamp = site.time | date: "%s" | plus: 0 %}
+  {% assign upcoming_count = 0 %}
+  <section aria-labelledby="upcoming_events_title">
+    <h2 id="upcoming_events_title">&gt; próximos</h2>
+    <ol class="content_entries">
+    {% for event in events %}
+      {% assign event_timestamp = event.starts_at | date: "%s" | plus: 0 %}
+      {% if event_timestamp >= now_timestamp %}
+        {% include content_item.html post=event %}
+        {% assign upcoming_count = upcoming_count | plus: 1 %}
+      {% endif %}
+    {% endfor %}
+    </ol>
+    {% if upcoming_count == 0 %}<p class="empty_state">Nenhum evento futuro publicado no momento.</p>{% endif %}
+  </section>
+  {% assign past_count = 0 %}
+  <section aria-labelledby="past_events_title">
+    <h2 id="past_events_title">&gt; histórico</h2>
+    <ol class="content_entries">
+    {% for event in events reversed %}
+      {% assign event_timestamp = event.starts_at | date: "%s" | plus: 0 %}
+      {% if event_timestamp < now_timestamp %}
+        {% include content_item.html post=event %}
+        {% assign past_count = past_count | plus: 1 %}
+      {% endif %}
+    {% endfor %}
+    </ol>
+    {% if past_count == 0 %}<p class="empty_state">O histórico será formado conforme os eventos forem publicados.</p>{% endif %}
+  </section>
+</article>

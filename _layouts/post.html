@@ -12,4 +12,5 @@ layout: default
   <div class="post_content e-content" itemprop="{% if page.type == 'event' %}description{% else %}articleBody{% endif %}">
     {{ content }}
   </div>
+  {% include related_content.html %}
 </article>
