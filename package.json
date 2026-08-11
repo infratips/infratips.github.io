@@ -1,0 +1,14 @@
+{
+  "name": "infratips-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Smoke tests renderizados do site InfraTips",
+  "scripts": {
+    "test": "playwright test",
+    "test:local": "playwright test"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "4.10.2",
+    "@playwright/test": "1.58.2"
+  }
+}

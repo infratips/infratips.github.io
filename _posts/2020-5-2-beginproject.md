@@ -1,14 +1,9 @@
 ---
 layout: post
 title: Iniciando projeto InfraTips
-author: Eleu Carlos
-post_list: "date"
 toc: true
-home_btn: true
-btn_text: true
 footer: true
 maximize: true
-encrypted_text: true
 toc_level: 4
 category: Eventos
 date: 2020-5-2
@@ -30,4 +25,4 @@ Importante:<br>
 *YouTube*, [link](https://www.youtube.com/channel/UCFkdMTcBKxdKownORUBEkIw)
 
 ### Logo
-![img-smpl]({{site.url}}{{site.baseurl}}{{site.assets_path}}/img/infratipsalpha.png)
+![Logo do InfraTips, uma nuvem azul com uma lampada ao centro]({{ '/assets/img/infratipsalpha.png' | relative_url }})
