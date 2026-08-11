@@ -1,6 +1,9 @@
 online:
   label: "Online"
+  schema: "https://schema.org/OnlineEventAttendanceMode"
 in-person:
   label: "Presencial"
+  schema: "https://schema.org/OfflineEventAttendanceMode"
 hybrid:
   label: "Híbrido"
+  schema: "https://schema.org/MixedEventAttendanceMode"

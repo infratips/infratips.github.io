@@ -1,0 +1,83 @@
+<section class="home_intro" aria-labelledby="home_title">
+  <p class="terminal_prompt">&gt; conhecimento_tecnico_compartilhado</p>
+  <h1 id="home_title">InfraTips</h1>
+  <p class="home_lead">Conteúdo técnico e experiências práticas para aprender, trabalhar e evoluir em infraestrutura, Linux, Cloud, DevOps, segurança, programação e IA.</p>
+</section>
+
+<section id="comece-aqui" class="discovery_section" aria-labelledby="start_title">
+  <h2 id="start_title">&gt; comece_aqui</h2>
+  <p>Escolha um ponto de partida. Estas entradas organizam o conteúdo existente sem transformar o InfraTips em uma plataforma de cursos.</p>
+  <ul class="discovery_links">
+    <li><a href="{{ '/conteudo/categorias/fundamentals-career/' | relative_url }}">Estou começando em TI</a><span>Fundamentos, estudos e carreira.</span></li>
+    <li><a href="{{ '/conteudo/categorias/linux-open-source/' | relative_url }}">Quero aprender Linux</a><span>Linux, terminal e Open Source.</span></li>
+    <li><a href="{{ '/conteudo/categorias/cloud-devops/' | relative_url }}">Quero trabalhar com Cloud e DevOps</a><span>Cloud, automação, IaC e entrega contínua.</span></li>
+    <li><a href="{{ '/conteudo/categorias/security/' | relative_url }}">Quero conhecer Segurança</a><span>Fundamentos, práticas e ferramentas.</span></li>
+    <li><a href="{{ '/conteudo/categorias/programming-ai/' | relative_url }}">Quero explorar Programação e IA</a><span>Código, automação e Inteligência Artificial.</span></li>
+  </ul>
+</section>
+
+<section class="discovery_section" aria-labelledby="recent_title">
+  <div class="section_heading">
+    <h2 id="recent_title">&gt; recentes</h2>
+    <a href="{{ '/conteudo/' | relative_url }}">Ver todo o conteúdo</a>
+  </div>
+  <ol class="content_entries">
+    {% for post in site.posts limit: 5 %}
+      {% include content_item.html post=post %}
+    {% endfor %}
+  </ol>
+</section>
+
+<section class="discovery_section" aria-labelledby="tips_title">
+  <div class="section_heading">
+    <h2 id="tips_title">&gt; infratips</h2>
+    <a href="{{ '/conteudo/tipos/tip/' | relative_url }}">Todas as InfraTips</a>
+  </div>
+  {% assign tips = site.posts | where: "type", "tip" %}
+  {% if tips.size > 0 %}
+  <ol class="content_entries">
+    {% for post in tips limit: 4 %}
+      {% include content_item.html post=post %}
+    {% endfor %}
+  </ol>
+  {% else %}
+  <p class="empty_state">Nenhuma InfraTip publicada ainda.</p>
+  {% endif %}
+</section>
+
+<section class="discovery_section" aria-labelledby="events_title">
+  <div class="section_heading">
+    <h2 id="events_title">&gt; eventos</h2>
+    <a href="{{ '/eventos/' | relative_url }}">Agenda e histórico</a>
+  </div>
+  {% assign events = site.posts | where: "type", "event" | sort: "starts_at" %}
+  {% assign now_timestamp = site.time | date: "%s" | plus: 0 %}
+  {% assign upcoming_count = 0 %}
+  <ol class="content_entries">
+  {% for event in events %}
+    {% assign event_timestamp = event.starts_at | date: "%s" | plus: 0 %}
+    {% if event_timestamp >= now_timestamp and upcoming_count < 3 %}
+      {% include content_item.html post=event %}
+      {% assign upcoming_count = upcoming_count | plus: 1 %}
+    {% endif %}
+  {% endfor %}
+  </ol>
+  {% if upcoming_count == 0 %}<p class="empty_state">Nenhum evento futuro publicado no momento.</p>{% endif %}
+</section>
+
+<section class="discovery_section" aria-labelledby="materials_title">
+  <h2 id="materials_title">&gt; materiais_e_canais</h2>
+  <p>Materiais complementares, vídeos e atualizações são publicados nos canais oficiais.</p>
+  <ul class="inline_links">
+    {% for social_link in site.social_links %}
+    <li><a href="{{ social_link.url }}"{% if social_link.external %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ social_link.label }}</a></li>
+    {% endfor %}
+    <li><a href="{{ '/feed.xml' | relative_url }}">RSS</a></li>
+  </ul>
+</section>
+
+<section class="discovery_section founder_summary" aria-labelledby="founder_title">
+  <h2 id="founder_title">&gt; fundador</h2>
+  <p>{{ site.data.profile.short_bio }}</p>
+  <a href="{{ '/sobre/' | relative_url }}">Conheça o projeto e o fundador</a>
+</section>

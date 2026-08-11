@@ -26,11 +26,15 @@ class ContentValidator
     @statuses = load_controlled_data("statuses")
     @event_modes = load_controlled_data("event_modes")
     @event_states = load_controlled_data("event_states")
+    @archives = { "type" => {}, "category" => {} }
   end
 
   def run
     validate_controlled_data
     content_files.each { |path| validate_file(path) }
+    validate_archive_coverage
+    validate_navigation
+    validate_discovery_config
     validate_internal_links
     validate_docs_adapter
     errors
@@ -83,6 +87,13 @@ class ContentValidator
       errors << "_data/types.yml: politica de level invalida para '#{id}'" unless %w[required optional forbidden].include?(policy)
       errors << "_data/types.yml: schema ausente para '#{id}'" unless present?(config["schema"])
       errors << "_data/types.yml: toc deve ser booleano para '#{id}'" unless [true, false].include?(config["toc"])
+      errors << "_data/types.yml: description ausente para '#{id}'" unless present?(config["description"])
+    end
+    @categories.each do |id, config|
+      errors << "_data/categories.yml: description ausente para '#{id}'" unless present?(config["description"])
+    end
+    @event_modes.each do |id, config|
+      errors << "_data/event_modes.yml: schema ausente para '#{id}'" unless present?(config["schema"])
     end
   end
 
@@ -132,6 +143,76 @@ class ContentValidator
 
   def validate_page(relative, data)
     validate_unique_url(relative, data["permalink"]) if present?(data["permalink"])
+    return unless data["layout"] == "archive"
+
+    kind = data["archive_kind"]
+    id = data["archive_id"]
+    unless @archives.key?(kind)
+      errors << "#{relative}: archive_kind invalido '#{kind}'"
+      return
+    end
+    source = kind == "type" ? @types : @categories
+    errors << "#{relative}: archive_id invalido '#{id}' para #{kind}" unless source.key?(id)
+    register_unique(@archives[kind], id, relative, "arquivo #{kind}") if present?(id)
+    expected_url = "/conteudo/#{kind == "type" ? "tipos" : "categorias"}/#{id}/"
+    errors << "#{relative}: permalink esperado #{expected_url}" unless data["permalink"] == expected_url
+  end
+
+  def validate_archive_coverage
+    { "type" => @types, "category" => @categories }.each do |kind, source|
+      (source.keys - @archives[kind].keys).each do |id|
+        errors << "pages/archives: arquivo ausente para #{kind} '#{id}'"
+      end
+    end
+  end
+
+  def validate_navigation
+    path = @root.join("_data", "navigation.yml")
+    return errors << "_data/navigation.yml: arquivo ausente" unless path.file?
+
+    entries = YAML.safe_load(path.read, aliases: false)
+    unless entries.is_a?(Array) && !entries.empty?
+      errors << "_data/navigation.yml: deve conter uma lista nao vazia"
+      return
+    end
+    seen_urls = []
+    entries.each_with_index do |entry, index|
+      unless entry.is_a?(Hash)
+        errors << "_data/navigation.yml: item #{index + 1} deve ser um mapa"
+        next
+      end
+      %w[label aria_label url icon].each do |field|
+        errors << "_data/navigation.yml: item #{index + 1} sem '#{field}'" unless present?(entry[field])
+      end
+      url = entry["url"].to_s
+      errors << "_data/navigation.yml: URL interna invalida '#{url}'" unless url.start_with?("/")
+      errors << "_data/navigation.yml: URL duplicada '#{url}'" if seen_urls.include?(url)
+      seen_urls << url
+      clean = normalize_url(url)
+      errors << "_data/navigation.yml: destino inexistente '#{url}'" unless @urls.key?(clean)
+    end
+  rescue Psych::SyntaxError => error
+    errors << "_data/navigation.yml: YAML invalido (#{error.problem})"
+  end
+
+  def validate_discovery_config
+    config_path = @root.join("_config.yml")
+    config = YAML.safe_load(config_path.read, permitted_classes: [Date, Time], aliases: false) || {}
+    errors << "_config.yml: plugin jekyll-feed ausente" unless Array(config["plugins"]).include?("jekyll-feed")
+    errors << "_config.yml: feed.path deve ser feed.xml" unless config.dig("feed", "path") == "feed.xml"
+    %w[
+      _layouts/home.html
+      _layouts/archive.html
+      _layouts/content_index.html
+      _layouts/events.html
+      _includes/home_discovery.html
+      _includes/related_content.html
+      _includes/breadcrumbs.html
+    ].each do |required_path|
+      errors << "#{required_path}: template de descoberta ausente" unless @root.join(required_path).file?
+    end
+  rescue Psych::SyntaxError => error
+    errors << "_config.yml: YAML invalido (#{error.problem})"
   end
 
   def validate_level(relative, data, type_config)
@@ -337,49 +418,74 @@ end
 
 def write_self_test_project(root, valid:)
   root.join("_data").mkpath
+  root.join("_includes").mkpath
   root.join("_layouts").mkpath
   root.join("_posts").mkpath
   root.join("pages").mkpath
   root.join("_layouts/post.html").write("<!doctype html>")
   root.join("_layouts/default.html").write("<!doctype html>")
+  %w[home archive content_index events tag_index].each do |layout|
+    root.join("_layouts", "#{layout}.html").write("---\nlayout: default\n---\n")
+  end
+  %w[home_discovery related_content breadcrumbs].each do |include_name|
+    root.join("_includes", "#{include_name}.html").write("fixture")
+  end
   root.join("_data/types.yml").write(<<~YAML)
     article:
       label: Artigo
+      description: Artigo
       level: optional
       toc: true
       schema: BlogPosting
     tutorial:
       label: Tutorial
+      description: Tutorial
       level: required
       toc: true
       schema: TechArticle
     tip:
       label: InfraTip
+      description: Dica
       level: required
       toc: false
       schema: TechArticle
     news:
       label: Noticia
+      description: Noticia
       level: forbidden
       toc: false
       schema: NewsArticle
     experience:
       label: Experiencia
+      description: Experiencia
       level: optional
       toc: true
       schema: BlogPosting
     event:
       label: Evento
+      description: Evento
       level: forbidden
       toc: false
       schema: Event
   YAML
-  root.join("_data/categories.yml").write("linux-open-source:\n  label: Linux e Open Source\n")
+  root.join("_data/categories.yml").write("linux-open-source:\n  label: Linux e Open Source\n  description: Linux\n")
   root.join("_data/levels.yml").write("beginner:\n  label: Iniciante\n")
   root.join("_data/statuses.yml").write("published:\n  label: Publicado\n")
-  root.join("_data/event_modes.yml").write("online:\n  label: Online\n")
+  root.join("_data/event_modes.yml").write("online:\n  label: Online\n  schema: https://schema.org/OnlineEventAttendanceMode\n")
   root.join("_data/event_states.yml").write("upcoming:\n  label: Proximo\ntoday:\n  label: Hoje\npast:\n  label: Encerrado\n")
+  root.join("_data/navigation.yml").write("- label: Inicio\n  aria_label: Inicio\n  url: /\n  icon: fa-home\n")
+  root.join("_config.yml").write("plugins:\n  - jekyll-feed\nfeed:\n  path: feed.xml\n")
   root.join("pages/index.md").write("---\nlayout: default\npermalink: /\n---\n")
+  archive_ids = {
+    "type" => %w[article tutorial tip news experience event],
+    "category" => %w[linux-open-source]
+  }
+  archive_ids.each do |kind, ids|
+    ids.each do |id|
+      directory = kind == "type" ? "tipos" : "categorias"
+      root.join("pages", "archive-#{kind}-#{id}.md").write("---\nlayout: archive\ntitle: #{id}\narchive_kind: #{kind}\narchive_id: #{id}\npermalink: /conteudo/#{directory}/#{id}/\n---\n")
+    end
+  end
   root.join("_posts").glob("*").each(&:delete)
 
   unless valid

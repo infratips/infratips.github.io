@@ -48,10 +48,12 @@
 {% endif %}
 {% assign event_mode = site.data.event_modes[page.mode] %}
 <dl class="content_details">
+  <meta itemprop="eventAttendanceMode" content="{{ event_mode.schema }}">
   <div><dt>Status</dt><dd>{{ event_state.label }}</dd></div>
-  <div><dt>Inicio</dt><dd><time datetime="{{ page.starts_at | date_to_xmlschema }}">{{ page.starts_at | date: "%d/%m/%Y %H:%M" }}</time> ({{ page.timezone }})</dd></div>
+  <div><dt>Início</dt><dd><time itemprop="startDate" datetime="{{ page.starts_at | date_to_xmlschema }}">{{ page.starts_at | date: "%d/%m/%Y %H:%M" }}</time> ({{ page.timezone }})</dd></div>
+  {% if page.ends_at %}<div><dt>Fim</dt><dd><time itemprop="endDate" datetime="{{ page.ends_at | date_to_xmlschema }}">{{ page.ends_at | date: "%d/%m/%Y %H:%M" }}</time></dd></div>{% endif %}
   <div><dt>Modalidade</dt><dd>{{ event_mode.label }}</dd></div>
-  {% if page.location %}<div><dt>Local</dt><dd>{{ page.location }}</dd></div>{% endif %}
+  {% if page.location %}<div><dt>Local</dt><dd itemprop="location">{{ page.location }}</dd></div>{% endif %}
   {% if page.registration_url %}<div><dt>Inscrição</dt><dd><a href="{{ page.registration_url }}" rel="noopener noreferrer">Acessar inscrição</a></dd></div>{% endif %}
 </dl>
 {% endif %}

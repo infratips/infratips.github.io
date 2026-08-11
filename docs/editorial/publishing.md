@@ -10,6 +10,8 @@
 6. Abra Pull Request, revise o artefato e aguarde o CI.
 7. Obtenha aprovacao humana antes do merge.
 
+Listas recentes, páginas de tipo/categoria, tags, relacionados, sitemap e RSS são atualizados pelo build. Publicar conteúdo não exige editar esses índices.
+
 ```bash
 bundle exec ruby scripts/validate_content.rb --self-test
 bundle exec ruby scripts/validate_content.rb

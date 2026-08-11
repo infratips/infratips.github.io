@@ -11,6 +11,7 @@ docs_vivas:
     editorial_model: docs/editorial/content-model.md
     taxonomy: docs/editorial/taxonomy.md
     publishing: docs/editorial/publishing.md
+    discovery: docs/editorial/discovery.md
   operational_state_owner: docs/roadmap.md
   continuity:
     owner: docs/roadmap.md

@@ -1,15 +1,15 @@
 <!doctype html>
 <html lang="{{ page.lang | default: site.lang }}">
   {% include head.html %}
-  <body class="page">
+  <body class="page layout_{{ page.layout }}">
     <a class="skip_link" href="#main_content">Pular para o conteudo</a>
     {% include background.html %}
     <div class="terminal_shell" id="terminal_shell">
       {% include header.html %}
       <main class="main_content" id="main_content" tabindex="-1">
         <div class="content_frame">
+          {% include breadcrumbs.html %}
           {{ content }}
-          {% include list_of_articles.html %}
           {% if page.footer == true %}
             {% include footer.html %}
           {% endif %}

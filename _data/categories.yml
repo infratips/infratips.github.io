@@ -1,10 +1,15 @@
 fundamentals-career:
   label: "Fundamentos e Carreira"
+  description: "Base técnica, estudos, certificações e desenvolvimento profissional."
 linux-open-source:
   label: "Linux e Open Source"
+  description: "Sistemas Linux, terminal, administração e ecossistema Open Source."
 cloud-devops:
   label: "Cloud e DevOps"
+  description: "Cloud, automação, infraestrutura como código e entrega contínua."
 security:
   label: "Segurança"
+  description: "Fundamentos, práticas e ferramentas para ambientes mais seguros."
 programming-ai:
   label: "Programação e IA"
+  description: "Código, automação, engenharia de software e Inteligência Artificial."

@@ -12,6 +12,11 @@ test("home renderiza com estrutura, SEO e sem overflow", async ({ page }, testIn
     "https://www.infratips.com.br/"
   );
   await expect(page.locator('meta[property="og:title"]')).toHaveCount(1);
+  await expect(page.locator("article[itemtype='https://schema.org/WebSite']")).toBeVisible();
+  await expect(page.locator("#comece-aqui")).toBeVisible();
+  await expect(page.getByRole("heading", { name: "> recentes" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "> infratips" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "> eventos" })).toBeVisible();
 
   const hasOverflow = await page.evaluate(
     () => document.documentElement.scrollWidth > document.documentElement.clientWidth
@@ -31,6 +36,9 @@ test("header oferece controles e links sociais acessiveis", async ({ page }) => 
     "href",
     "https://www.linkedin.com/in/eleucarlos/"
   );
+  for (const name of ["Explorar conteúdo", "Comece aqui", "Eventos", "Sobre o InfraTips"]) {
+    await expect(page.getByRole("link", { name })).toBeVisible();
+  }
 
   const undersized = await page.locator(".site_header a:visible, .site_header button:visible").evaluateAll(
     (elements) => elements
@@ -70,11 +78,55 @@ test("InfraTip deriva template, taxonomia e controles do tipo", async ({ page },
   await expect(page.locator(".post_info")).toContainText("Iniciante");
   await expect(page.locator("#toc_toggle")).toHaveCount(0);
   await expect(page.locator("pre code").first()).toContainText("ss -lntup");
+  await expect(page.locator(".breadcrumbs[itemtype='https://schema.org/BreadcrumbList']")).toBeVisible();
 
   await page.screenshot({
     path: testInfo.outputPath(`infratip-${testInfo.project.name}.png`),
     fullPage: true
   });
+});
+
+test("diretorios permitem navegar por tipo, categoria, tags e eventos", async ({ page }, testInfo) => {
+  await page.goto("/conteudo/");
+  await expect(page.getByRole("heading", { level: 1, name: "Conteúdo" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "InfraTip", exact: true })).toHaveAttribute(
+    "href",
+    "/conteudo/tipos/tip/"
+  );
+  await expect(page.getByRole("link", { name: "Linux e Open Source" })).toHaveAttribute(
+    "href",
+    "/conteudo/categorias/linux-open-source/"
+  );
+  await page.screenshot({
+    path: testInfo.outputPath(`conteudo-${testInfo.project.name}.png`),
+    fullPage: true
+  });
+
+  await page.goto("/conteudo/tipos/tip/");
+  await expect(page.getByRole("link", { name: "Como verificar portas em escuta no Linux" })).toBeVisible();
+  await expect(page.locator(".breadcrumbs")).toContainText("Conteúdo");
+
+  await page.goto("/conteudo/tags/");
+  await expect(page.getByRole("heading", { name: "#linux" })).toBeVisible();
+
+  await page.goto("/eventos/");
+  await expect(page.getByText("Nenhum evento futuro publicado no momento.")).toBeVisible();
+  await page.screenshot({
+    path: testInfo.outputPath(`eventos-${testInfo.project.name}.png`),
+    fullPage: true
+  });
+});
+
+test("RSS geral e sitemap sao publicados", async ({ request }) => {
+  const feed = await request.get("/feed.xml");
+  expect(feed.ok()).toBe(true);
+  expect(feed.headers()["content-type"]).toContain("xml");
+  const feedBody = await feed.text();
+  expect(feedBody).toContain("Como verificar portas em escuta no Linux");
+
+  const sitemap = await request.get("/sitemap.xml");
+  expect(sitemap.ok()).toBe(true);
+  expect(await sitemap.text()).toContain("/conteudo/tipos/tip/");
 });
 
 test("controles de leitura funcionam por teclado", async ({ page }) => {
@@ -102,7 +154,15 @@ test("controles de leitura funcionam por teclado", async ({ page }) => {
 });
 
 test("paginas principais nao possuem violacoes criticas de acessibilidade", async ({ page }) => {
-  for (const path of ["/", "/beginproject/", "/verificar-portas-em-escuta-no-linux/"]) {
+  for (const path of [
+    "/",
+    "/conteudo/",
+    "/conteudo/tipos/tip/",
+    "/eventos/",
+    "/sobre/",
+    "/beginproject/",
+    "/verificar-portas-em-escuta-no-linux/"
+  ]) {
     await page.goto(path);
     const results = await new AxeBuilder({ page }).analyze();
     expect(results.violations.filter(({ impact }) => impact === "critical"), path).toEqual([]);

@@ -60,6 +60,8 @@ tests/            Smoke tests Playwright
 
 O contrato editorial e os campos por tipo estao em [`docs/editorial/content-model.md`](docs/editorial/content-model.md). A taxonomia executavel fica em `_data/`, e o fluxo completo esta em [`docs/editorial/publishing.md`](docs/editorial/publishing.md).
 
+A descoberta por tipos, categorias, tags, eventos, relacionados e RSS está documentada em [`docs/editorial/discovery.md`](docs/editorial/discovery.md). Busca permanece fora do produto até o acervo justificar sua adoção.
+
 ## Publicacao
 
 1. Crie uma branch a partir de `master`.
