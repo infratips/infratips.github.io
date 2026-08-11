@@ -63,7 +63,7 @@ test("artigo possui semantica e imagem descritiva", async ({ page }) => {
   await expect(page.locator("article[itemtype='https://schema.org/BlogPosting']")).toBeVisible();
   await expect(page.locator("h1")).toHaveCount(1);
   await expect(page.locator("article img")).toHaveAttribute("alt", /InfraTips/);
-  await expect(page.locator("time")).toContainText("02/05/2020");
+  await expect(page.locator("time.dt-published")).toContainText("02/05/2020");
 });
 
 test("InfraTip deriva template, taxonomia e controles do tipo", async ({ page }, testInfo) => {
@@ -110,11 +110,23 @@ test("diretorios permitem navegar por tipo, categoria, tags e eventos", async ({
   await expect(page.getByRole("heading", { name: "#linux" })).toBeVisible();
 
   await page.goto("/eventos/");
-  await expect(page.getByText("Nenhum evento futuro publicado no momento.")).toBeVisible();
+  await expect(page.getByRole("link", { name: "KubeCon + CloudNativeCon North America 2026" })).toBeVisible();
   await page.screenshot({
     path: testInfo.outputPath(`eventos-${testInfo.project.name}.png`),
     fullPage: true
   });
+});
+
+test("evento curado aceita datas sem horario inventado", async ({ page }) => {
+  await page.goto("/kubecon-cloudnativecon-north-america-2026/");
+
+  await expect(page.locator("article[itemtype='https://schema.org/Event']")).toBeVisible();
+  await expect(page.locator(".content_details")).toContainText("09/11/2026");
+  await expect(page.locator(".content_details")).not.toContainText("00:00");
+  await expect(page.getByRole("link", { name: "Acessar inscrição" })).toHaveAttribute(
+    "href",
+    "https://events.linuxfoundation.org/kubecon-cloudnativecon-north-america/"
+  );
 });
 
 test("RSS geral e sitemap sao publicados", async ({ request }) => {

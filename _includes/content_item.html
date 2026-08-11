@@ -8,7 +8,7 @@
     <span>{{ type_config.label }}</span>
     <span>{{ category_config.label }}</span>
     {% if item.type == "event" %}
-    <time datetime="{{ item.starts_at | date_to_xmlschema }}">{{ item.starts_at | date: "%d/%m/%Y %H:%M" }}</time>
+    {% include event_date.html value=item.starts_at %}
     {% else %}
     <time datetime="{{ item.date | date_to_xmlschema }}">{{ item.date | date: "%d/%m/%Y" }}</time>
     {% endif %}

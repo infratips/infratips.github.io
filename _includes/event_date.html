@@ -1,0 +1,2 @@
+{% assign event_value = include.value | append: "" %}
+<time{% if include.itemprop %} itemprop="{{ include.itemprop }}"{% endif %} datetime="{{ include.value | date_to_xmlschema }}">{% if event_value contains "T" %}{{ include.value | date: "%d/%m/%Y %H:%M" }}{% else %}{{ include.value | date: "%d/%m/%Y" }}{% endif %}</time>
