@@ -12,9 +12,9 @@
 
 **LAST COMPLETED:** P0 publicada; correcao de visibilidade Matrix e texto da home integrados no merge `dc7fec62`.
 
-**CURRENT STATE:** P1 possui contrato Markdown, taxonomia executavel, template compartilhado, anti-drift editorial, exemplo de InfraTip e documentacao viva; gates locais estao verdes.
+**CURRENT STATE:** P1 possui contrato Markdown, taxonomia executavel, template compartilhado, anti-drift editorial, exemplo de InfraTip e documentacao viva; gates locais e CI remoto do PR #3 estao verdes.
 
-**PARTIALLY COMPLETED:** CI remoto e revisao humana dependem do Pull Request da P1.
+**PARTIALLY COMPLETED:** revisao e aprovacao humanas do Pull Request #3.
 
 **BLOCKED:** nenhum bloqueio conhecido.
 
@@ -22,4 +22,4 @@
 
 **NEXT CRITICAL ACTION:** revisar o Pull Request e seus artefatos; nao iniciar P2 antes da aprovacao da P1.
 
-**NEXT 5:** validar CI remoto; revisar contrato e InfraTip; solicitar ajustes ou aprovar; mesclar somente com autorizacao; planejar P2 separadamente.
+**NEXT 5:** revisar contrato e InfraTip; inspecionar artefatos do CI; solicitar ajustes ou aprovar; mesclar somente com autorizacao; planejar P2 separadamente.
