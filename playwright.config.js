@@ -23,7 +23,7 @@ module.exports = defineConfig({
     }
   ],
   webServer: {
-    command: "JEKYLL_ENV=production bundle exec jekyll build && ruby -run -e httpd _site -p 4000 -b 127.0.0.1",
+    command: "JEKYLL_ENV=production bundle exec jekyll build && bundle exec ruby -run -e httpd _site -p 4000 -b 127.0.0.1",
     url: "http://127.0.0.1:4000",
     reuseExistingServer: !process.env.CI,
     timeout: 120000
