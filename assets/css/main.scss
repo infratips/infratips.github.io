@@ -7,7 +7,7 @@ $green: #4fc51c;
 $green-bright: #7eea48;
 $green-dim: #2f8f0d;
 $black: #000;
-$panel: rgba(0, 0, 0, 0.91);
+$panel: rgba(0, 0, 0, 0.78);
 $muted: #afbea9;
 $warning: #ff6b6b;
 $focus: #fff;
@@ -228,6 +228,7 @@ a:hover {
   width: min(100% - 40px, 900px);
   margin: 0 auto;
   padding: 28px 0 16px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.95);
 }
 
 h1,

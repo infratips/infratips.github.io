@@ -10,7 +10,7 @@ permalink: /
 # PROJETO INFRATIPS - COMPARTILHANDO CONHECIMENTO
 
 ## Ideia
-* Compartilhar conhecimento adquirido ao longo dos anos na área de TI.
+* Compartilhar conhecimentos e experiências adquiridos ao longo de uma trajetória em tecnologia.
    
   <p class="encrypted">"Nada é tão bom que não possa ser melhorado, qualquer um de nós está sempre em aprendizado. Quando achamos que já sabemos tudo é o sinal que nem começamos a aprender o básico, HUMILDADE"</p>  
   <p align="right">Gilmar de Freitas Vasconcelos</p>
@@ -33,17 +33,17 @@ permalink: /
   * Etc/Sugestões...
 
 ## Material
-  * Encontram-se nas redes sociais descritas no cabeçalho/topo do site.
-  * Principais tipos:
+ * Conteúdos e materiais complementares estão disponíveis nos canais oficiais indicados no cabeçalho.
+ * Principais formatos:
     * Webinar na prática;
     * Vídeo aulas gravadas;
     * Material de apoio disponível no repositório.
 
   
 ## Fundador
-* Eleu Carlos Roldão da S. Junior é Gaúcho nascido na região metropolitana de Porto Alegre. Trabalha com GNU/Linux desde 2001, possui diversas certificações e atualmente vem trabalhando em projetos de IaC.
+* Eleu Carlos Roldão da S. Junior é gaúcho e nasceu na Região Metropolitana de Porto Alegre. Trabalha com GNU/Linux desde 2001, possui diversas certificações e atua em projetos complexos de Cloud, Infraestrutura como Código (IaC) e Inteligência Artificial nos principais provedores globais.
   
-  <p class="encrypted">IMPORTANTE: Tudo que for postado em quaisquer redes sociais da InfraTips não refere-se as empresas que os integrantes do time trabalham atualmente, portanto comentários deverão ser postados diretamente a InfraTips.</p>
+ <p class="encrypted">IMPORTANTE: O conteúdo publicado nos canais do InfraTips representa exclusivamente o projeto, e não as empresas com as quais seus colaboradores mantêm vínculo profissional. Dúvidas e comentários devem ser direcionados aos canais oficiais do InfraTips.</p>
 
   
 <!--```ruby
