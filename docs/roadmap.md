@@ -7,21 +7,40 @@
 - P2 — Home e descoberta: concluida e publicada no merge `87433a0`.
 - Acervo editorial inicial: concluido e publicado no merge `4e55c54`.
 - P3 — Experiencia educacional: concluida e publicada no merge `134856e`.
-- P3.1 — Maturidade de conteudo e experiencia: concluida e aprovada na PR `#7`.
+- P3.1 — Maturidade de conteudo e experiencia: concluida e publicada no merge `685ba6e5ab0353376cc3c376b069168bcbfedde9`.
 - P4 — Preparacao para Cortex: nao iniciada.
 
 ## Handoff
 
-**LAST COMPLETED:** P3.1 concluida e aprovada na PR `#7`, com validacoes locais e CI remoto verdes.
+**STATUS:** PAUSED — HEALTHY
 
-**CURRENT STATE:** P0 a P3.1 estao concluidas. O site oferece fundacao tecnica, modelo editorial, descoberta, acervo inicial, trilhas de entrada e orientacao de carreira; P3.1 reforca Seguranca e Programacao e IA e diferencia a leitura de tutorial e experiencia de campo sem mudar a arquitetura.
+**LAST COMPLETED:** P3.1 publicada em producao no merge `685ba6e5ab0353376cc3c376b069168bcbfedde9`.
 
-**PARTIALLY COMPLETED:** nenhum item em execucao.
+**CURRENT STATE:**
 
-**BLOCKED:** nenhum bloqueio conhecido.
+- P0–P3.1 concluidas;
+- producao saudavel;
+- CI e GitHub Pages verdes;
+- anti-drift PASS;
+- `master` sincronizada;
+- modelo editorial e docs-vivas ativos.
 
-**PENDING HUMAN DECISIONS:** decidir entre ampliar o acervo, fazer refinamentos leves de produto ou iniciar a preparacao da P4; Cortex nao deve ser iniciado automaticamente.
+**PAUSE REASON:** Fundacao tecnica, editorial, descoberta e experiencia inicial estao maduras o suficiente. O projeto sera pausado para priorizar outros trabalhos e permitir crescimento orientado por conteudo e uso real.
 
-**NEXT CRITICAL ACTION:** observar o uso real do site e escolher explicitamente o proximo investimento, sem iniciar P4 por continuidade automatica do roadmap.
+**WHEN RESUMING:**
 
-**NEXT 5:** confirmar producao da P3.1; observar navegacao e consumo; priorizar lacunas editoriais reais; avaliar refinamentos pequenos com evidencia; preparar Cortex somente apos decisao explicita.
+1. executar `/docs-vivas handoff` e `/docs-vivas check`;
+2. validar producao e CI;
+3. revisar roadmap;
+4. ampliar conteudo das trilhas;
+5. fazer refinamentos somente com evidencia de uso;
+6. reavaliar P4/Cortex apenas se existir cadencia editorial repetitiva ou gargalo concreto.
+
+**PENDING / FUTURE:**
+
+- ampliar acervo;
+- observar uso das trilhas;
+- refinamentos incrementais;
+- Pagefind quando houver aproximadamente 30–50 conteudos;
+- P4/Cortex quando houver justificativa operacional;
+- debitos tecnicos ja documentados permanecem nao bloqueantes.
