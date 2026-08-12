@@ -2,7 +2,7 @@
 
 ## Proposito
 
-`/comece-aqui/` organiza trilhas leves para visitantes que estao comecando em TI ou querem praticar Linux, Cloud e DevOps. Elas sao curadoria editorial, nao uma plataforma LMS: nao ha conta, progresso, certificado ou gamificacao.
+`/comece-aqui/` organiza trilhas leves para visitantes que estao comecando em TI ou querem praticar Linux, Cloud e DevOps, Seguranca, Programacao e IA. Elas sao curadoria editorial, nao uma plataforma LMS: nao ha conta, progresso, certificado ou gamificacao.
 
 ## Fonte executavel
 
@@ -14,4 +14,4 @@
 
 ## Evolucao
 
-Novas trilhas so devem ser adicionadas quando houver ao menos uma sequencia curta e coerente de conteudos existentes. Tags nao derivam trilhas automaticamente.
+Novas trilhas so devem ser adicionadas quando houver ao menos uma sequencia curta e coerente de conteudos existentes. A mesma peca pode aparecer em mais de uma trilha quando seu objetivo for diferente, mas a curadoria deve evitar repetir o acervo inteiro em cada caminho. Tags nao derivam trilhas automaticamente.

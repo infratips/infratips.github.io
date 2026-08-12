@@ -36,7 +36,7 @@ test("header oferece controles e links sociais acessiveis", async ({ page }) => 
     "href",
     "https://www.linkedin.com/in/eleucarlos/"
   );
-  for (const name of ["Explorar conteúdo", "Comece aqui", "Eventos", "Sobre o InfraTips"]) {
+  for (const name of ["Explorar conteúdo", "Comece aqui", "Eventos", "Sobre o InfraTips", "Carreira, certificacoes e labs"]) {
     await expect(page.getByRole("link", { name })).toBeVisible();
   }
 
@@ -117,6 +117,41 @@ test("diretorios permitem navegar por tipo, categoria, tags e eventos", async ({
   });
 });
 
+test("trilhas e carreira oferecem proximos passos sem overflow", async ({ page }, testInfo) => {
+  await page.goto("/comece-aqui/");
+  await expect(page.getByRole("heading", { level: 1, name: "Comece aqui" })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 2, name: "> Quero comecar em Seguranca" })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 2, name: "> Quero explorar Programacao e IA" })).toBeVisible();
+  await expect(
+    page
+      .getByRole("region", { name: "> Quero explorar Programacao e IA" })
+      .getByRole("link", { name: "Automatizando uma checagem HTTP com Python" })
+  ).toBeVisible();
+
+  await page.goto("/carreira/");
+  await expect(page.getByRole("heading", { level: 1, name: "Carreira, certificacoes e labs" })).toBeVisible();
+  await expect(page.getByRole("heading", { level: 2, name: "> proximos_passos" })).toBeVisible();
+  await expect(page.getByRole("link", { name: "Escolha uma trilha de entrada" })).toHaveAttribute(
+    "href",
+    "/comece-aqui/#track_start-in-it"
+  );
+
+  const hasOverflow = await page.evaluate(
+    () => document.documentElement.scrollWidth > document.documentElement.clientWidth
+  );
+  expect(hasOverflow).toBe(false);
+  await page.screenshot({ path: testInfo.outputPath(`carreira-${testInfo.project.name}.png`), fullPage: true });
+});
+
+test("tutorial e experiencia recebem guias de leitura por tipo", async ({ page }) => {
+  await page.goto("/verificar-endpoint-http-com-python/");
+  await expect(page.locator(".content_type_guide_tutorial")).toContainText("procedimento");
+
+  await page.goto("/aplicacao-funciona-localmente-mas-nao-externamente/");
+  await expect(page.locator(".content_type_guide_experience")).toContainText("Diagnostico");
+  await expect(page.locator(".content_type_guide_experience")).toContainText("Resultado");
+});
+
 test("evento curado aceita datas sem horario inventado", async ({ page }) => {
   await page.goto("/kubecon-cloudnativecon-north-america-2026/");
 
@@ -171,6 +206,8 @@ test("paginas principais nao possuem violacoes criticas de acessibilidade", asyn
     "/conteudo/",
     "/conteudo/tipos/tip/",
     "/eventos/",
+    "/comece-aqui/",
+    "/carreira/",
     "/sobre/",
     "/beginproject/",
     "/verificar-portas-em-escuta-no-linux/"

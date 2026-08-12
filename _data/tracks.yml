@@ -1,17 +1,15 @@
 start-in-it:
   label: "Estou comecando em TI"
-  summary: "Fundamentos, estudo pratico e primeiros laboratorios."
+  summary: "Fundamentos, estudo pratico e primeiras evidencias tecnicas."
   items:
     - /estudar-tecnologia-com-pratica-deliberada/
-    - /verificar-portas-em-escuta-no-linux/
-    - /laboratorio-nginx-com-docker-compose/
+    - /documentar-laboratorio-tecnico-com-readme/
 linux-foundations:
   label: "Quero aprender Linux"
   summary: "Terminal, armazenamento e diagnostico inicial."
   items:
     - /verificar-portas-em-escuta-no-linux/
     - /encontrar-diretorios-que-consomem-espaco-no-linux/
-    - /aplicacao-funciona-localmente-mas-nao-externamente/
 cloud-devops:
   label: "Quero trabalhar com Cloud e DevOps"
   summary: "IaC, containers e diagnostico por camadas."
@@ -24,11 +22,22 @@ career-certifications:
   summary: "Evidencias praticas para orientar estudos e oportunidades."
   items:
     - /estudar-tecnologia-com-pratica-deliberada/
-    - /laboratorio-nginx-com-docker-compose/
-    - /validar-terraform-antes-do-apply/
+    - /documentar-laboratorio-tecnico-com-readme/
 labs-experiences:
   label: "Labs e experiencias praticas"
   summary: "Aprenda reproduzindo, observando e registrando resultados."
   items:
     - /laboratorio-nginx-com-docker-compose/
-    - /aplicacao-funciona-localmente-mas-nao-externamente/
+    - /verificar-endpoint-http-com-python/
+security-basics:
+  label: "Quero comecar em Seguranca"
+  summary: "Inventario, acesso remoto e exposicao consciente de um laboratorio."
+  items:
+    - /inventariar-superficie-de-ataque-em-lab-linux/
+    - /verificar-portas-em-escuta-no-linux/
+programming-ai:
+  label: "Quero explorar Programacao e IA"
+  summary: "Automacao pequena, verificavel e aplicavel ao trabalho de infraestrutura."
+  items:
+    - /verificar-endpoint-http-com-python/
+    - /validar-terraform-antes-do-apply/
