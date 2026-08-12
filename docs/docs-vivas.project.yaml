@@ -12,6 +12,7 @@ docs_vivas:
     taxonomy: docs/editorial/taxonomy.md
     publishing: docs/editorial/publishing.md
     discovery: docs/editorial/discovery.md
+    learning_paths: docs/editorial/learning-paths.md
   operational_state_owner: docs/roadmap.md
   continuity:
     owner: docs/roadmap.md

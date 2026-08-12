@@ -1,0 +1,34 @@
+start-in-it:
+  label: "Estou comecando em TI"
+  summary: "Fundamentos, estudo pratico e primeiros laboratorios."
+  items:
+    - /estudar-tecnologia-com-pratica-deliberada/
+    - /verificar-portas-em-escuta-no-linux/
+    - /laboratorio-nginx-com-docker-compose/
+linux-foundations:
+  label: "Quero aprender Linux"
+  summary: "Terminal, armazenamento e diagnostico inicial."
+  items:
+    - /verificar-portas-em-escuta-no-linux/
+    - /encontrar-diretorios-que-consomem-espaco-no-linux/
+    - /aplicacao-funciona-localmente-mas-nao-externamente/
+cloud-devops:
+  label: "Quero trabalhar com Cloud e DevOps"
+  summary: "IaC, containers e diagnostico por camadas."
+  items:
+    - /validar-terraform-antes-do-apply/
+    - /laboratorio-nginx-com-docker-compose/
+    - /aplicacao-funciona-localmente-mas-nao-externamente/
+career-certifications:
+  label: "Carreira e certificacoes"
+  summary: "Evidencias praticas para orientar estudos e oportunidades."
+  items:
+    - /estudar-tecnologia-com-pratica-deliberada/
+    - /laboratorio-nginx-com-docker-compose/
+    - /validar-terraform-antes-do-apply/
+labs-experiences:
+  label: "Labs e experiencias praticas"
+  summary: "Aprenda reproduzindo, observando e registrando resultados."
+  items:
+    - /laboratorio-nginx-com-docker-compose/
+    - /aplicacao-funciona-localmente-mas-nao-externamente/

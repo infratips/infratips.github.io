@@ -26,6 +26,7 @@ class ContentValidator
     @statuses = load_controlled_data("statuses")
     @event_modes = load_controlled_data("event_modes")
     @event_states = load_controlled_data("event_states")
+    @tracks = load_controlled_data("tracks")
     @archives = { "type" => {}, "category" => {} }
   end
 
@@ -35,6 +36,7 @@ class ContentValidator
     validate_archive_coverage
     validate_navigation
     validate_discovery_config
+    validate_tracks
     validate_internal_links
     validate_docs_adapter
     errors
@@ -72,7 +74,8 @@ class ContentValidator
       "levels" => @levels,
       "statuses" => @statuses,
       "event_modes" => @event_modes,
-      "event_states" => @event_states
+      "event_states" => @event_states,
+      "tracks" => @tracks
     }.each do |name, entries|
       entries.each do |id, config|
         errors << "_data/#{name}.yml: ID invalido '#{id}'" unless id.to_s.match?(ID_PATTERN)
@@ -205,6 +208,7 @@ class ContentValidator
       _layouts/archive.html
       _layouts/content_index.html
       _layouts/events.html
+      _layouts/learning_paths.html
       _includes/home_discovery.html
       _includes/related_content.html
       _includes/breadcrumbs.html
@@ -213,6 +217,26 @@ class ContentValidator
     end
   rescue Psych::SyntaxError => error
     errors << "_config.yml: YAML invalido (#{error.problem})"
+  end
+
+  def validate_tracks
+    @tracks.each do |id, track|
+      relative = "_data/tracks.yml: '#{id}'"
+      unless track.is_a?(Hash)
+        errors << "#{relative} deve ser um mapa"
+        next
+      end
+      errors << "#{relative} precisa de summary" unless present?(track["summary"])
+      items = track["items"]
+      unless items.is_a?(Array) && !items.empty?
+        errors << "#{relative} precisa de items"
+        next
+      end
+      errors << "#{relative} possui items duplicados" unless items.uniq.length == items.length
+      items.each do |item|
+        errors << "#{relative} possui item invalido '#{item}'" unless item.is_a?(String) && @urls.key?(normalize_url(item))
+      end
+    end
   end
 
   def validate_level(relative, data, type_config)
@@ -435,7 +459,7 @@ def write_self_test_project(root, valid:)
   root.join("pages").mkpath
   root.join("_layouts/post.html").write("<!doctype html>")
   root.join("_layouts/default.html").write("<!doctype html>")
-  %w[home archive content_index events tag_index].each do |layout|
+  %w[home archive content_index events tag_index learning_paths].each do |layout|
     root.join("_layouts", "#{layout}.html").write("---\nlayout: default\n---\n")
   end
   %w[home_discovery related_content breadcrumbs].each do |include_name|
@@ -484,6 +508,7 @@ def write_self_test_project(root, valid:)
   root.join("_data/statuses.yml").write("published:\n  label: Publicado\n")
   root.join("_data/event_modes.yml").write("online:\n  label: Online\n  schema: https://schema.org/OnlineEventAttendanceMode\n")
   root.join("_data/event_states.yml").write("upcoming:\n  label: Proximo\ntoday:\n  label: Hoje\npast:\n  label: Encerrado\n")
+  root.join("_data/tracks.yml").write("inicio:\n  label: Inicio\n  summary: Trilha inicial\n  items:\n    - /artigo/\n")
   root.join("_data/navigation.yml").write("- label: Inicio\n  aria_label: Inicio\n  url: /\n  icon: fa-home\n")
   root.join("_config.yml").write("plugins:\n  - jekyll-feed\nfeed:\n  path: feed.xml\n")
   root.join("pages/index.md").write("---\nlayout: default\npermalink: /\n---\n")
