@@ -20,6 +20,7 @@ Este diretorio e a fonte canonica para arquitetura, contrato editorial, publicac
 | Taxonomia | `docs/editorial/taxonomy.md` |
 | Publicacao e operacao editorial | `docs/editorial/publishing.md` |
 | Descoberta, arquivos, relacionados e RSS | `docs/editorial/discovery.md` |
+| Trilhas, carreira e uso educacional leve | `docs/editorial/learning-paths.md` |
 | Continuidade e roadmap | `docs/roadmap.md` |
 
 ## Definition of Done

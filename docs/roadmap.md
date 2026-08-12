@@ -5,22 +5,22 @@
 - P0 — Fundacao tecnica e UX: concluida e publicada.
 - P1 — Modelo editorial: concluída e publicada no merge `ef851712`.
 - P2 — Home e descoberta: concluida e publicada no merge `87433a0`.
-- Acervo editorial inicial: implementado e em validacao na branch `feat/initial-content-library`.
-- P3 — Experiencia educacional: nao iniciada.
+- Acervo editorial inicial: concluido e publicado no merge `4e55c54`.
+- P3 — Experiencia educacional: implementada na branch `feat/p3-learning-paths`.
 - P4 — Preparacao para Cortex: nao iniciada.
 
 ## Handoff
 
-**LAST COMPLETED:** P2 publicada no merge `87433a0`, com CI, GitHub Pages e producao mobile validados.
+**LAST COMPLETED:** acervo editorial inicial publicado no merge `4e55c54`.
 
-**CURRENT STATE:** o acervo inicial usa o contrato editorial em `_posts/`: tres InfraTips, um tutorial, um artigo, uma experiencia de campo e um evento curado. O validador aceita eventos de dia inteiro sem inventar horario; build, HTML Proofer, anti-drift e Playwright nos quatro breakpoints estao verdes localmente.
+**CURRENT STATE:** P3 adiciona `/comece-aqui/`, trilhas curadas em `_data/tracks.yml` e `/carreira/`, com caminhos para estudos, certificacoes, labs e experiencias praticas.
 
-**PARTIALLY COMPLETED:** revisao humana, CI remoto e publicacao do acervo editorial inicial.
+**PARTIALLY COMPLETED:** CI remoto, revisao e publicacao da P3.
 
 **BLOCKED:** nenhum bloqueio conhecido.
 
-**PENDING HUMAN DECISIONS:** aprovar ou solicitar ajustes no acervo editorial antes de iniciar P3.
+**PENDING HUMAN DECISIONS:** nenhum para a P3; P4 continua dependente de uma decisao futura sobre integracao Cortex.
 
-**NEXT CRITICAL ACTION:** abrir a PR do acervo inicial, validar CI e artefatos e aguardar revisao, sem iniciar P3.
+**NEXT CRITICAL ACTION:** validar CI e GitHub Pages da P3 e publicar o merge.
 
-**NEXT 5:** abrir PR do acervo; confirmar CI; revisar artefatos; fazer merge somente com autorizacao humana; iniciar P3 somente apos producao validada.
+**NEXT 5:** confirmar CI; publicar P3; validar producao; manter Pagefind e agendamento adiados; documentar P4 somente quando autorizado.
