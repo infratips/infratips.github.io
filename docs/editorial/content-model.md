@@ -67,6 +67,10 @@ Uma `tip` tem normalmente 100 a 500 palavras e organiza contexto, comando ou rec
 
 Uma `experience` deve tornar reconheciveis contexto, problema, diagnostico, solucao, resultado e licoes. Esses blocos permanecem no Markdown, sem campos artificiais de front matter.
 
+## Apresentacao por tipo
+
+Tutorial e experiencia de campo usam o mesmo layout editorial, mas recebem um guia visual leve antes do corpo. O tutorial destaca o uso sequencial do procedimento; a experiencia destaca contexto, diagnostico, solucao e resultado. O guia nao substitui os blocos reais do Markdown nem cria um novo tipo de conteudo.
+
 ## Imagens
 
 Imagens sao opcionais. Quando usadas no front matter, informe `image_alt`; quando usadas no corpo Markdown, escreva alt significativo. Caminhos locais precisam existir. Thumbnails nao sao obrigatorias para nenhum tipo na P1.

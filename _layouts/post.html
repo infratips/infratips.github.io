@@ -9,6 +9,22 @@ layout: default
     <h1 class="p-name" itemprop="headline">{{ page.title }}</h1>
     {% include content_details.html %}
   </header>
+  {% if page.type == "tutorial" %}
+  <aside class="content_type_guide content_type_guide_tutorial" aria-label="Como usar este tutorial">
+    <p class="content_type_guide_label">&gt; procedimento</p>
+    <p>Execute uma etapa por vez, confira o resultado esperado e registre qualquer diferenca antes de seguir.</p>
+  </aside>
+  {% elsif page.type == "experience" %}
+  <aside class="content_type_guide content_type_guide_experience" aria-label="Estrutura desta experiencia de campo">
+    <p class="content_type_guide_label">&gt; experiencia_de_campo</p>
+    <ol>
+      <li>Contexto</li>
+      <li>Diagnostico</li>
+      <li>Solucao</li>
+      <li>Resultado</li>
+    </ol>
+  </aside>
+  {% endif %}
   <div class="post_content e-content" itemprop="{% if page.type == 'event' %}description{% else %}articleBody{% endif %}">
     {{ content }}
   </div>

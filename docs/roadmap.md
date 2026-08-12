@@ -6,21 +6,22 @@
 - P1 — Modelo editorial: concluída e publicada no merge `ef851712`.
 - P2 — Home e descoberta: concluida e publicada no merge `87433a0`.
 - Acervo editorial inicial: concluido e publicado no merge `4e55c54`.
-- P3 — Experiencia educacional: implementada na branch `feat/p3-learning-paths`.
+- P3 — Experiencia educacional: concluida e publicada no merge `134856e`.
+- P3.1 — Maturidade de conteudo e experiencia: concluida e aprovada na PR `#7`.
 - P4 — Preparacao para Cortex: nao iniciada.
 
 ## Handoff
 
-**LAST COMPLETED:** acervo editorial inicial publicado no merge `4e55c54`.
+**LAST COMPLETED:** P3.1 concluida e aprovada na PR `#7`, com validacoes locais e CI remoto verdes.
 
-**CURRENT STATE:** P3 adiciona `/comece-aqui/`, trilhas curadas em `_data/tracks.yml` e `/carreira/`, com caminhos para estudos, certificacoes, labs e experiencias praticas.
+**CURRENT STATE:** P0 a P3.1 estao concluidas. O site oferece fundacao tecnica, modelo editorial, descoberta, acervo inicial, trilhas de entrada e orientacao de carreira; P3.1 reforca Seguranca e Programacao e IA e diferencia a leitura de tutorial e experiencia de campo sem mudar a arquitetura.
 
-**PARTIALLY COMPLETED:** CI remoto, revisao e publicacao da P3.
+**PARTIALLY COMPLETED:** nenhum item em execucao.
 
 **BLOCKED:** nenhum bloqueio conhecido.
 
-**PENDING HUMAN DECISIONS:** nenhum para a P3; P4 continua dependente de uma decisao futura sobre integracao Cortex.
+**PENDING HUMAN DECISIONS:** decidir entre ampliar o acervo, fazer refinamentos leves de produto ou iniciar a preparacao da P4; Cortex nao deve ser iniciado automaticamente.
 
-**NEXT CRITICAL ACTION:** validar CI e GitHub Pages da P3 e publicar o merge.
+**NEXT CRITICAL ACTION:** observar o uso real do site e escolher explicitamente o proximo investimento, sem iniciar P4 por continuidade automatica do roadmap.
 
-**NEXT 5:** confirmar CI; publicar P3; validar producao; manter Pagefind e agendamento adiados; documentar P4 somente quando autorizado.
+**NEXT 5:** confirmar producao da P3.1; observar navegacao e consumo; priorizar lacunas editoriais reais; avaliar refinamentos pequenos com evidencia; preparar Cortex somente apos decisao explicita.
