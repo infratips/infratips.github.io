@@ -118,6 +118,8 @@ a:hover {
   position: sticky;
   top: 0;
   z-index: 20;
+  container-name: site-header;
+  container-type: inline-size;
   border-bottom: 1px solid $green-dim;
   background: rgba(0, 0, 0, 0.97);
 }
@@ -639,6 +641,35 @@ th {
   color: $muted;
   font-size: 13px;
   text-align: center;
+}
+
+@container site-header (max-width: 1450px) {
+  .header_social .btn_text,
+  .header_controls .btn_text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+}
+
+@container site-header (max-width: 1275px) {
+  .btn_text {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
 }
 
 * {

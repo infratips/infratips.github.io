@@ -8,6 +8,7 @@
 - Acervo editorial inicial: concluido e publicado no merge `4e55c54`.
 - P3 — Experiencia educacional: concluida e publicada no merge `134856e`.
 - P3.1 — Maturidade de conteudo e experiencia: concluida e publicada no merge `685ba6e5ab0353376cc3c376b069168bcbfedde9`.
+- Manutencao incremental — responsividade do cabecalho corrigida localmente; publicacao pendente.
 - P4 — Preparacao para Cortex: nao iniciada.
 
 ## Handoff
