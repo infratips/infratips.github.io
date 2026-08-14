@@ -50,6 +50,28 @@ test("header oferece controles e links sociais acessiveis", async ({ page }) => 
   );
   expect(undersized).toEqual([]);
 
+  const overlappingControls = await page.locator(".header_nav a:visible, .header_nav button:visible").evaluateAll(
+    (elements) => elements.flatMap((element, index) => {
+      const current = element.getBoundingClientRect();
+      return elements.slice(index + 1).flatMap((otherElement) => {
+        const other = otherElement.getBoundingClientRect();
+        const overlaps =
+          current.left < other.right &&
+          current.right > other.left &&
+          current.top < other.bottom &&
+          current.bottom > other.top;
+
+        return overlaps
+          ? [{
+              first: element.getAttribute("aria-label") || element.textContent.trim(),
+              second: otherElement.getAttribute("aria-label") || otherElement.textContent.trim()
+            }]
+          : [];
+      });
+    })
+  );
+  expect(overlappingControls).toEqual([]);
+
   await page.keyboard.press("Tab");
   await expect(page.getByRole("link", { name: "Pular para o conteudo" })).toBeFocused();
   await page.getByRole("button", { name: /Matrix/ }).focus();
